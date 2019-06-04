@@ -1,0 +1,37 @@
+page-factory {
+    *{
+        padding: 0;
+        margin: 0;
+    }
+    .factory-btn {
+        width: 80%;
+        height: 10vh;
+        justify-content: center;
+        align-content: center;
+    }
+    .factory-list-btn {
+        background: #3498db;
+        color: azure;
+        font-size: 4vh;
+        margin-left: 10%;
+        font-weight: 500;
+        margin-bottom: 2vh;
+    }
+    .add-factory-icon {
+        font-size: 4vh;
+        font-weight: 100;
+    }
+    .add-factory-btn {
+        background-color: tomato;
+        color: azure;
+        font-size: 4vh;
+        margin-left: 10%;
+        border-radius: 3px;
+        font-weight: bolder;
+    }
+    .factory-upd {
+        font-size: 6px;
+        font-weight: 100;
+        color: green;
+    }
+}

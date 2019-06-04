@@ -1,0 +1,38 @@
+[
+    {
+        "name": "buyer",
+        "space": 1,
+        "color": "#FF6666",
+        "icon": "cart"
+    },{
+        "name": "smelter",
+        "space": 2,
+        "color": "#FF9966",
+        "icon": "color-fill"
+    },{
+        "name": "wiredrawer",
+        "space": 3,
+        "color": "#FFCC66",
+        "icon": "color-wand"
+    },{
+        "name": "press",
+        "space": 4,
+        "color": "#FFFF66",
+        "icon": "arrow-dropdown-circle"
+    },{
+        "name": "cutter",
+        "space": 1,
+        "color": "#FFE6E6",
+        "icon": "cut"
+    },{
+        "name": "lathe",
+        "space": 3,
+        "color": "#FFCCCC",
+        "icon": "barcode"
+    },{
+        "name": "seller",
+        "space": 1,
+        "color": "#BFFF00",
+        "icon": "cash"
+    }
+]

@@ -1,0 +1,88 @@
+page-line {
+    .box {
+        border: 1px solid grey;
+        width: 9vw;
+        height: 9vw;
+        background-color: #edfdf8;
+        opacity: .9;
+    }
+    .button {
+        height: 30px;
+        width: 20%;
+        margin: 2%;
+        margin-top: 0;
+        font-size: 16px;
+        border-radius: 3px;
+        box-shadow: 2px 3px #888888;
+    }
+    .warn-btn {
+        background-color: brown;
+        color: aliceblue;
+    }
+    .normal-btn {
+        height: 30px;
+        width: 20%;
+        margin: 2%;
+        margin-top: 0;
+        font-size: 14px;
+        border-radius: 3px;
+        color: aliceblue;
+        background-color: forestgreen;
+        box-shadow: 2px 3px #888888;
+    }
+    .selected-btn {
+        height: 30px;
+        width: 20%;
+        margin: 2%;
+        margin-top: 0;
+        font-size: 14px;
+        border-radius: 3px;
+        box-shadow: -2px -3px #888888;
+        background-color: #4d85ff;
+    }
+    .active-div{
+        border: 2px solid #af0000 !important;
+        box-shadow: 2px 3px #3b0000 !important;
+        background-color: antiquewhite !important;
+        ion-icon {
+            color : #af0000 !important;
+        }
+    }
+    .ul-icon {
+        list-style-type: none;
+        padding: 0;
+        display: flex;
+        width: inherit;
+        overflow-x: auto;
+        li{
+            margin: 1vw;
+            div{
+                width: 22vw;
+                height: 29vw;
+                border: 2px solid #303030;
+                box-shadow: 2px 3px #888888;
+                padding-top: 2vw;
+                justify-content: center;
+                text-align: center;
+                background-color: aliceblue;
+                label{
+                    display: block;
+                }
+                ion-icon {
+                    display: block;
+                    font-size: 9vw;
+                    color : #222;
+                }
+                p{
+                    height: 2vw;
+                }
+            }
+        }
+    }
+    .pop-over {
+        position: absolute;
+    }
+    .back-button {
+        
+    }
+}

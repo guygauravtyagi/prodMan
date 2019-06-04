@@ -1,0 +1,23 @@
+{
+    "totalValue": 1000,
+    "factoryList":[
+        {
+            "factoryName": "Factory 1",
+            "factoryId": "fact1",
+            "costOfMaintainance": 1,
+            "profit": 0,
+            "maximumLine": 5,
+            "lineList": [
+                {
+                    "producing":[],
+                    "consuming":[],
+                    "equipmentsUsed":[],
+                    "lineSpace":100,
+                    "totalInputCost":0,
+                    "totalOutputCost":0,
+                    "totalEauipmentCost":0
+                }
+            ]
+        }
+    ]
+}

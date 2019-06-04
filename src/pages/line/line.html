@@ -1,0 +1,53 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title><span *ngIf="activeFactory && activeFactory.lineList && activeFactory.lineList.length > 0 && lineListActive">Active Lines</span><span  *ngIf="activeFactory && activeFactory.lineList && activeFactory.lineList.length > 0 && !lineListActive">Add Equipments</span></ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content class="ct-main">
+  <div *ngIf="lineListActive">
+    <button> Add Line</button>
+  </div>
+  <div *ngIf="activeFactory && activeFactory.lineList && activeFactory.lineList.length > 0 && lineListActive">
+    <ul>
+      <li *ngFor="let line of activeFactory.lineList; let i=index" (click)="lineSelected(i)"> Line {{i+1}} </li>
+    </ul>
+  </div>
+  <div class="pop-over" *ngIf="!lineListActive" >
+      <div style="margin-top: 5vw; margin-left: 5vw;">
+        <button (click)="goBackToLine()" class="back-button">Back</button>
+      </div>
+      <div style="margin: 5vw;">
+        <div style="width: 90vw; height: 90vw;">
+            <table style="border-collapse: collapse; border: 1px solid black;">
+              <tr *ngFor="let lineSpace of selectedLineSpace; let i=index" style="border: 1px solid black;">
+                <td *ngFor="let line of lineSpace; let j=index" class="box" [style.background-color]="line.equipment.color" (click)="updateBox(i,j);">
+        
+                </td>
+              </tr>
+            </table>
+        </div>
+        <div style="margin-top:5vw; width: 90vw;">
+          <h4 style="margin-right: 2%;" *ngIf="selectedAction">{{selectedAction}} item</h4>
+          <button class="button " [class]="selectedAction === 'add' ? 'selected-btn' : 'normal-btn' " (click)="updateMAD('add');">Add</button>
+          <button class="button " [class]="selectedAction === 'remove' ? 'selected-btn' : 'normal-btn' " (click)="updateMAD('remove');">Remove</button>
+          <button class="button " [class]="selectedAction === 'move' ? 'selected-btn' : 'normal-btn' " (click)="updateMAD('move');">Move</button>
+          <button class="button warn-btn" (click)="resetLine();">Reset</button>
+        </div>
+        <div style="margin-top:5vw; width: 90vw;">
+          <h5>Select below product to add them in line</h5>
+          <ul class="ul-icon">
+            <li *ngFor="let equipment of equipmentList">
+              <div (click)="selectEquipment(equipment)" [class]="selectedEquipment && selectedEquipment.name === equipment.name ? 'active-div' : '' ">
+                  <ion-icon [name]="equipment.icon"></ion-icon>
+                  <label>{{equipment.name | titlecase}}</label>
+                  <label style="font-weight:bold;" >Occupies: </label>
+                  <label>{{equipment.space}} Block<span *ngIf="equipment.space > 1">s</span></label>
+                  <p [style.background-color]="equipment.color" ></p>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+  </div>
+</ion-content>

@@ -1,0 +1,29 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <h4 class="tp-head"> &#36;{{mainObject?.totalValue}}</h4>
+  </ion-navbar>
+</ion-header>
+
+<ion-content class="ct-main">
+  <div class="bck-ctt-imc">
+    <div *ngFor="let factory of mainObject.factoryList">
+      <div>
+        <button class="factory-btn factory-list-btn" (click)="sendToline(factory)">
+          {{factory.factoryName}}
+          <span class="factory-upd">
+            (prfoit: &#36; {{factory.prfoit}})
+          </span>
+        </button>
+      </div>
+    </div>
+    <div>
+      <button class="factory-btn add-factory-btn">
+        <ion-icon name="add-circle"></ion-icon>
+        Buy More Factory
+      </button>
+    </div>
+  </div>
+</ion-content>
