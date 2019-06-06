@@ -9,12 +9,52 @@
             "maximumLine": 5,
             "lineList": [
                 {
+                    "lineName": "Line 1",
+                    "producing":[],
+                    "consuming":[],
+                    "equipmentsUsed":[],
+                    "lineSpace":100,
+                    "totalInputCost":10,
+                    "totalOutputCost":0,
+                    "totalEauipmentCost":0
+                },
+                {
+                    "lineName": "Line 2",
                     "producing":[],
                     "consuming":[],
                     "equipmentsUsed":[],
                     "lineSpace":100,
                     "totalInputCost":0,
+                    "totalOutputCost":10,
+                    "totalEauipmentCost":0
+                }
+            ]
+        },
+        {
+            "factoryName": "Factory 2",
+            "factoryId": "fact2",
+            "costOfMaintainance": 1,
+            "profit": 0,
+            "maximumLine": 5,
+            "lineList": [
+                {
+                    "lineName": "Line 1",
+                    "producing":[],
+                    "consuming":[],
+                    "equipmentsUsed":[],
+                    "lineSpace":100,
+                    "totalInputCost":10,
                     "totalOutputCost":0,
+                    "totalEauipmentCost":0
+                },
+                {
+                    "lineName": "Line 2",
+                    "producing":[],
+                    "consuming":[],
+                    "equipmentsUsed":[],
+                    "lineSpace":100,
+                    "totalInputCost":0,
+                    "totalOutputCost":10,
                     "totalEauipmentCost":0
                 }
             ]

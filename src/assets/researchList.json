@@ -1,0 +1,40 @@
+[
+    {
+        "name" : "Work Speed",
+        "effect" : "workSpeed",
+        "subcatagory" : [
+            {
+                "name" : "something",
+                "cost" : 100,
+                "ticksRequired" : 50,
+                "effectPercent" : 0.02
+            },
+            {
+                "name" : "something",
+                "cost" : 200,
+                "ticksRequired" : 100,
+                "effectPercent" : 0.03
+            }
+        ]
+
+    },
+    {
+        "name" : "Product bonus",
+        "effect" : "productBonus",
+        "subcatagory" : [
+            {
+                "name" : "something",
+                "cost" : 100,
+                "ticksRequired" : 50,
+                "effectPercent" : 0.02
+            },
+            {
+                "name" : "something",
+                "cost" : 200,
+                "ticksRequired" : 100,
+                "effectPercent" : 0.03
+            }
+        ]
+
+    }
+]

@@ -5,13 +5,13 @@
 </ion-header>
 
 <ion-content class="ct-main">
-  <div *ngIf="lineListActive">
-    <button> Add Line</button>
-  </div>
-  <div *ngIf="activeFactory && activeFactory.lineList && activeFactory.lineList.length > 0 && lineListActive">
+  <div class="line-list" *ngIf="activeFactory && activeFactory.lineList && activeFactory.lineList.length > 0 && lineListActive">
     <ul>
       <li *ngFor="let line of activeFactory.lineList; let i=index" (click)="lineSelected(i)"> Line {{i+1}} </li>
     </ul>
+  </div>
+  <div *ngIf="lineListActive">
+    <button class="add-button"><ion-icon name="add-circle"></ion-icon> Add Line</button>
   </div>
   <div class="pop-over" *ngIf="!lineListActive" >
       <div style="margin-top: 5vw; margin-left: 5vw;">

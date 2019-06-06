@@ -11,18 +11,23 @@ import { CommonProvider } from './../../providers/common/common';
 export class HomePage {
 
   private mainObject: any;
+  private selectFactoryIndex: Number = 0;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public commonProvider: CommonProvider) {
-  }
-
-  public ngOnInit() {
     this.commonProvider.getGameObject.subscribe((gameObject) => {
       this.mainObject = gameObject;
     });
   }
 
-  public updateGame() {
-    this.commonProvider.updateGameObject(this.mainObject);
+  public ngOnInit() {
+
+  }
+
+  /**
+   * Called in HTML
+   */
+  private togglerFactoryList (index) {
+    this.selectFactoryIndex = index;
   }
 
   ionViewDidLoad() {

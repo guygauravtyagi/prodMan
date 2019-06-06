@@ -1,3 +1,45 @@
 page-home {
-
+    .ct-main {
+        .parent-card-container {
+            .card-conatiner {
+                .card {
+                    padding: 5px;
+                    margin: 8px;
+                    background-color: aliceblue;
+                    border-radius: 5px;
+                    -webkit-box-shadow: 4px 4px 3px -1px rgba(0,0,0,0.75);
+                    -moz-box-shadow: 4px 4px 3px -1px rgba(0,0,0,0.75);
+                    box-shadow: 4px 4px 3px -1px rgba(0,0,0,0.75);
+                    .card-head {
+                        background-color: #107979;
+                        padding: 10px;
+                        border-radius: 5px;
+                        label {
+                            font-size: 18px;
+                            font-weight: bold;
+                            color: beige;
+                        }
+                    }
+                    .card-body {
+                        ul {
+                            list-style: none;
+                            padding-inline-start: 1vw;
+                            li {
+                                div {
+                                    label {
+                                        font-size: 16px;
+                                        font-weight: bold;
+                                    }
+                                    p {
+                                        font-size: 14px;
+                                        line-height: 3px;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
 }

@@ -1,10 +1,43 @@
-<div class="ct-main">
-  <div class="custom-head">
+<ion-header>
+  <ion-navbar>
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
+    <ion-title>Overview<span class="money-main">${{mainObject?.totalValue}}</span></ion-title>
+  </ion-navbar>
+</ion-header>
+<ion-content class="ct-main">
+  <div class="parent-card-container">
+    <div *ngFor="let factory of mainObject?.factoryList; let indexF = index;" class="card-conatiner">
+      <div class="card">
+        <div class="card-head" (click)="togglerFactoryList(indexF);">
+          <label>{{factory.factoryName}}</label>
+        </div>
+        <div class="card-body" *ngIf="selectFactoryIndex === indexF">
+          <ul>
+            <li *ngFor="let line of factory.lineList">
+              <div>
+                <label>{{line.lineName}}</label>
+              </div>
+              <div>
+                <p><span>Space Available : </span>{{line.lineSpace}}</p>
+                <p><span *ngIf="(line.totalOutputCost - line.totalInputCost) >= 0">Profit : </span><span
+                    *ngIf="(line.totalOutputCost - line.totalInputCost) < 0">Loss :
+                  </span>{{line.totalOutputCost - line.totalInputCost}}</p>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
   </div>
-  <div class="custom-content">
-
+  <div>
+    <div class="card-conatiner">
+      <div class="card">
+        <div class="card-head">
+          <label></label>
+        </div>
+      </div>
+    </div>
   </div>
-</div>
+</ion-content>
