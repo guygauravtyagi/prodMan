@@ -1,6 +1,6 @@
 page-line {
     .box {
-        border: 1px solid grey;
+        border: 1px solid rgb(0, 0, 0);
         width: 9vw;
         height: 9vw;
         background-color: #edfdf8;
@@ -13,7 +13,7 @@ page-line {
         margin-top: 0;
         font-size: 16px;
         border-radius: 3px;
-        box-shadow: 2px 3px #888888;
+        box-shadow: 2px 3px #000000;
     }
     .warn-btn {
         background-color: brown;
@@ -28,7 +28,7 @@ page-line {
         border-radius: 3px;
         color: aliceblue;
         background-color: forestgreen;
-        box-shadow: 2px 3px #888888;
+        box-shadow: 2px 3px #000000;
     }
     .selected-btn {
         height: 30px;
@@ -37,12 +37,11 @@ page-line {
         margin-top: 0;
         font-size: 14px;
         border-radius: 3px;
-        box-shadow: -2px -3px #888888;
         background-color: #4d85ff;
     }
     .active-div{
         border: 2px solid #af0000 !important;
-        box-shadow: 2px 3px #3b0000 !important;
+        box-shadow: 4px 6px #3b0000 !important;
         background-color: antiquewhite !important;
         ion-icon {
             color : #af0000 !important;
@@ -58,9 +57,9 @@ page-line {
             margin: 1vw;
             div{
                 width: 22vw;
-                height: 29vw;
+                height: inherit;
                 border: 2px solid #303030;
-                box-shadow: 2px 3px #888888;
+                box-shadow: 4px 6px #000000;
                 padding-top: 2vw;
                 justify-content: center;
                 text-align: center;
@@ -74,16 +73,51 @@ page-line {
                     color : #222;
                 }
                 p{
-                    height: 2vw;
+                    height: 3vw;
+                    margin-bottom: 0px;
                 }
             }
         }
     }
     .pop-over {
         position: absolute;
-    }
-    .back-button {
-        
+        z-index: 99999;
+        background-color: #021b1ab6;
+        height: 100%;
+        .back-button-container {
+            padding: 1vw;
+            display: flex;
+            div {
+                height: 10vw;
+                width: 49vw;
+                button {
+                    height: 100%;
+                    width: 100%;
+                    color: #edfdf8;
+                    background: #fd1d1d;
+                    font-size: 5vw;
+                    font-weight: bold;
+                }
+            }
+            .money-container {
+                text-align: center;
+                padding: 3vw;
+                background: #4d85ff;
+                label {
+                    align-self: center;
+                    color: #edfdf8;
+                    font-size: 4vw;
+                }
+            }
+        }
+        div {
+            h4 {
+                color: #edfdf8;
+            }
+            h5 {
+                color: #edfdf8;
+            }
+        }
     }
     .ct-main {
         div{
@@ -118,6 +152,11 @@ page-line {
                     -moz-box-shadow: 3px 3px 2px -1px rgba(0,0,0,0.75);
                     box-shadow: 3px 3px 2px -1px rgba(0,0,0,0.75);
                 }
+            }
+        }
+        .line-main-container {
+            div {
+                
             }
         }
     }

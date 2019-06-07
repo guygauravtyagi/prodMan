@@ -6,18 +6,33 @@ import { BehaviorSubject } from 'rxjs';
 @Injectable()
 export class CommonProvider {
 
+  private gamePLayObject: any;
+
   private gameObject: any;
   private activeFactObj: any;
   private productListObj: any;
   private equipmentListObj: any;
+  /**
+   * 
+   */
   public mainObject = new BehaviorSubject(this.gameObject);
   public getGameObject = this.mainObject.asObservable();
+  /**
+   * 
+   */
   public activeFactory = new BehaviorSubject(this.activeFactObj);
   public getActiveFactory = this.activeFactory.asObservable();
+  /**
+   * 
+   */
   public productList = new BehaviorSubject(this.productListObj);
   public getProductList = this.productList.asObservable();
+  /**
+   * 
+   */
   public equipmentList = new BehaviorSubject(this.equipmentListObj);
   public getEquipmentList = this.equipmentList.asObservable();
+    
   private ticking: any;
 
   constructor(public http: HttpClient) {
@@ -30,6 +45,17 @@ export class CommonProvider {
     this.http.get("./../../assets/equipmentList.json").subscribe(data => {
         this.setEquipmentList(data);
     });
+    this.getGameObject.subscribe((gameObject) => {
+      this.gamePLayObject = gameObject;
+    });
+  }
+
+  public updateMoneySpent (spent) {
+    this.gamePLayObject.totalValue = this.gamePLayObject.totalValue - spent;
+  }
+  
+  public updateMoneyEarned (earned) {
+    this.gamePLayObject.totalValue = this.gamePLayObject.totalValue + earned;
   }
 
   public updateGameObject(obj: any) {

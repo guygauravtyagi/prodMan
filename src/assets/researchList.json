@@ -7,13 +7,19 @@
                 "name" : "something",
                 "cost" : 100,
                 "ticksRequired" : 50,
-                "effectPercent" : 0.02
+                "effectPercent" : 0.02,
+                "count" : 0,
+                "active" : true,
+                "percentComplete" : 0
             },
             {
                 "name" : "something",
                 "cost" : 200,
                 "ticksRequired" : 100,
-                "effectPercent" : 0.03
+                "effectPercent" : 0.03,
+                "count" : 0,
+                "active" : true,
+                "percentComplete" : 0
             }
         ]
 
@@ -26,13 +32,19 @@
                 "name" : "something",
                 "cost" : 100,
                 "ticksRequired" : 50,
-                "effectPercent" : 0.02
+                "effectPercent" : 0.02,
+                "count" : 0,
+                "active" : true,
+                "percentComplete" : 0
             },
             {
                 "name" : "something",
                 "cost" : 200,
                 "ticksRequired" : 100,
-                "effectPercent" : 0.03
+                "effectPercent" : 0.03,
+                "count" : 0,
+                "active" : true,
+                "percentComplete" : 0
             }
         ]
 
