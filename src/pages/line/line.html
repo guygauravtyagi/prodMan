@@ -21,6 +21,19 @@
     </button>
   </div>
   <div class="line-main-container" *ngIf="!lineListActive">
+    <div class="list-keep">
+      <div class="equipment-box">
+        <div *ngFor="let equipment of selectedLine?.equipmentLineList">
+          <div *ngIf="equipment.count > 0">
+            <label>{{equipment.selectedEquipment.name}}</label>
+            <p>{{equipment.count}}</p>
+          </div>
+        </div>
+      </div>
+      <div class="product-box">
+        
+      </div>
+    </div>
     <div>
       <button (click)="openPopup();">Add Equipment</button>
     </div>

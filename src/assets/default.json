@@ -17,7 +17,8 @@
                     "totalInputCost":10,
                     "totalOutputCost":0,
                     "totalEauipmentCost":0,
-                    "groupEquipmentArray":[]
+                    "groupEquipmentArray":[],
+                    "equipmentLineList":[]
                 },
                 {
                     "lineName": "Line 2",
@@ -28,7 +29,8 @@
                     "totalInputCost":0,
                     "totalOutputCost":10,
                     "totalEauipmentCost":0,
-                    "groupEquipmentArray":[]
+                    "groupEquipmentArray":[],
+                    "equipmentLineList":[]
                 }
             ]
         },
@@ -48,7 +50,8 @@
                     "totalInputCost":10,
                     "totalOutputCost":0,
                     "totalEauipmentCost":0,
-                    "groupEquipmentArray":[]
+                    "groupEquipmentArray":[],
+                    "equipmentLineList":[]
                 },
                 {
                     "lineName": "Line 2",
@@ -59,7 +62,8 @@
                     "totalInputCost":0,
                     "totalOutputCost":10,
                     "totalEauipmentCost":0,
-                    "groupEquipmentArray":[]
+                    "groupEquipmentArray":[],
+                    "equipmentLineList":[]
                 }
             ]
         }

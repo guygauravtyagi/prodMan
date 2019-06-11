@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
 import { CommonProvider } from './../../providers/common/common';
+import { count } from 'rxjs/operator/count';
 
 @IonicPage()
 @Component({
@@ -20,6 +21,8 @@ export class LinePage {
   private selectedEquipment: any;
   private activeFactory: any = [];
   private openAddLinePopup: boolean = false;
+
+  private productLineList: any = [];
 
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public commonProvider: CommonProvider) {
@@ -87,7 +90,6 @@ export class LinePage {
 
   private addEquipment(i, j) {
     let tempArr = [];
-    let equipmentDetails = {};
     if (this.selectedEquipment.space === 1) {
       this.selectedLineSpace[i][j].isEmpty = false;
       this.selectedLineSpace[i][j].equipment = this.selectedEquipment;
@@ -129,9 +131,38 @@ export class LinePage {
         tempArr.push({ i: i + 1, j: j + 1 });
       }
     }
-    equipmentDetails['equipGroup'] = tempArr;
+    this.updateAddition(tempArr);
+  }
+
+  private updateAddition(arr) {
+    let equipmentDetails = {};
+    equipmentDetails['equipGroup'] = arr;
     equipmentDetails['selectedEquipment'] = this.selectedEquipment;
-    this.selectedLine.groupEquipmentArray.push(equipmentDetails);
+    this.selectedLine.groupEquipmentArray.push(equipmentDetails);    
+    if(this.selectedLine.equipmentLineList.length > 0) {
+      let indexFlag = 0;
+      for (let index = 0; index < this.selectedLine.equipmentLineList.length; index++) {
+        if(this.selectedLine.equipmentLineList[index].selectedEquipment.name === this.selectedEquipment.name) {
+          indexFlag = index +1;
+        }
+      }
+      if(indexFlag) {
+        this.selectedLine.equipmentLineList[indexFlag -1].count += 1;
+      } else {
+        this.selectedLine.equipmentLineList.push({
+          selectedEquipment : JSON.parse(JSON.stringify(this.selectedEquipment)) ,
+          count : 1
+        });
+      }
+    } else {
+      this.selectedLine.equipmentLineList.push({
+        selectedEquipment : JSON.parse(JSON.stringify(this.selectedEquipment)) ,
+        count : 1
+      });
+    }
+    /**
+     * Update for everyone
+     */
     this.commonProvider.updateMoneySpent(this.selectedEquipment.buyingPrice);
   }
 
@@ -149,13 +180,39 @@ export class LinePage {
           }
         }
       }
+      if(this.selectedLine && this.selectedLine.groupEquipmentArray && this.selectedLine.groupEquipmentArray[temp] && this.selectedLine.groupEquipmentArray[temp].selectedEquipment) {
+        this.commonProvider.updateMoneyEarned(this.selectedLine.groupEquipmentArray[temp].selectedEquipment.sellingPrice);
+        if(this.selectedLine.equipmentLineList.length === 1 && this.selectedLine.equipmentLineList.count === 1) {
+          if(this.selectedLine.equipmentLineList[0].selectedEquipment.name === this.selectedLine.groupEquipmentArray[temp].selectedEquipment.name) {
+            this.selectedLine.equipmentLineList.length = 0;
+          }
+        } else {
+          let tempIndex = 0;
+          for (let index = 0; index < this.selectedLine.equipmentLineList.length; index++) {
+            if(this.selectedLine.groupEquipmentArray[temp].selectedEquipment.name === this.selectedLine.equipmentLineList[index].selectedEquipment.name) {
+              tempIndex = index + 1;
+            }
+          }
+          if(tempIndex) {
+            if(this.selectedLine.equipmentLineList[tempIndex - 1].count > 0) {
+              this.selectedLine.equipmentLineList[tempIndex - 1].count -= 1;
+            } else if (this.selectedLine.equipmentLineList[tempIndex - 1].count === 0) {
+              this.selectedLine.equipmentLineList.splice(tempIndex -1, 1);
+            } else {
+              /**
+               * Check how TF is this even possible
+               */
+              console.log("You just screwed the equipment list");
+            }
+          }
+        }
+      }
       this.selectedLine.groupEquipmentArray[temp].equipGroup.forEach(element => {
         this.selectedLineSpace[element.i][element.j] = {
           isEmpty: true,
           equipment: {}
         }
       });
-      if(this.selectedLine && this.selectedLine.groupEquipmentArray && this.selectedLine.groupEquipmentArray[temp] && this.selectedLine.groupEquipmentArray[temp].selectedEquipment) this.commonProvider.updateMoneyEarned(this.selectedLine.groupEquipmentArray[temp].selectedEquipment.sellingPrice);
       this.selectedLine.groupEquipmentArray.splice(temp, 1);
     }
   }
