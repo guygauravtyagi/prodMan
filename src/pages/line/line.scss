@@ -118,6 +118,39 @@ page-line {
                 color: #edfdf8;
             }
         }
+        .product-card-container {
+            display: flex;
+            flex-flow: row;
+            flex-wrap: wrap;
+            padding: 2vw;
+            .product-card {
+                margin: 2vw;
+                padding: 2vw;
+                background: #ffe8e4;
+                -webkit-box-shadow: 5px 5px 3px -1px rgba(0,0,0,0.75);
+                -moz-box-shadow: 5px 5px 3px -1px rgba(0,0,0,0.75);
+                box-shadow: 5px 5px 3px -1px rgba(0,0,0,0.75);
+                div {
+                    width : 40vw;
+                    label {
+                        margin: 0
+                    }
+                    p {
+                        margin: 0
+                    }
+                    .buy-button {
+                        width: 19.5vw;
+                        height: 25px;
+                        background-color: #fd1d1d;
+                    }
+                    .sell-button {
+                        width: 19.5vw;
+                        height: 25px;
+                        background-color: #4d85ff;
+                    }
+                }
+            }
+        }
     }
     .ct-main {
         div{
@@ -155,8 +188,76 @@ page-line {
             }
         }
         .line-main-container {
-            div {
-                
+            width: 100vw;
+            .list-keep {
+                padding: 2vw;
+                background: rgba(33, 46, 42, 0.5);
+                h4 {
+                    margin: 0;
+                    color: #bbf5e2;
+                    margin-bottom: 1vw;
+                    font-size: 24px;
+                    span {
+                        color: #fd1d1d;
+                    }
+                }
+                .equipment-box {
+                    background: linear-gradient(to right, rgb(173, 169, 150), rgb(242, 242, 242), rgb(219, 219, 219), rgb(234, 234, 234));
+                    width: 96vw;
+                    padding: 2vw;
+                    border-radius: 10px;
+                    display: flex;
+                    flex-direction: row;
+                    flex-wrap: wrap;
+                    -webkit-box-shadow: inset 0px 0px 6px 4px #132421;
+                    -moz-box-shadow: inset 0px 0px 6px 4px #132421;
+                    box-shadow: inset 0px 0px 6px 4px #132421;
+                    div {
+                        div {
+                            background: linear-gradient(to right, rgb(110, 110, 110), rgb(83, 105, 118));
+                            border-radius: 5px;
+                            padding: 1vw;
+                            width: 45vw;
+                            margin-right: 1vw;
+                            margin-bottom: 1vw;
+                            -webkit-box-shadow: 1px 1px 1px -1px rgba(0,0,0,0.75);
+                            -moz-box-shadow: 1px 1px 1px -1px rgba(0,0,0,0.75);
+                            box-shadow: 1px 1px 1px -1px rgba(0,0,0,0.75); 
+                            label {
+                                font-size: 16px;
+                                font-weight: bold;
+                                color: white;
+                                span {
+                                    font-size: 16px;
+                                    float: right;
+                                }
+                            }
+                            p {
+                                margin: 0;
+                                color: white;
+                            }
+                        }
+                    }
+                }
+                .buy-button {
+                    width: 40vw;
+                    height: 8vw;
+                    background-color: #684dff;
+                    margin-top: 1vw;
+                    color: #edfdf8;
+                    font-size: 4vw;
+                    -webkit-box-shadow: 3px 3px 3px -1px rgba(0,0,0,0.75);
+                    -moz-box-shadow: 3px 3px 3px -1px rgba(0,0,0,0.75);
+                    box-shadow: 3px 3px 3px -1px rgba(0,0,0,0.75);
+                }
+            }
+            .button-conatainer {
+                width: 100vw;
+                button {
+                    margin-left: 30%;
+                    width: 40%;
+                    height: 8vw;
+                }
             }
         }
     }

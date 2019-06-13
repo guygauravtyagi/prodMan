@@ -1,6 +1,4 @@
 // http://ionicframework.com/docs/theming/
-
-
 // App Global Sass
 // --------------------------------------------------
 // Put style rules here that you want to apply globally. These
@@ -15,20 +13,100 @@
 // for the .md, .ios, or .wp mode classes. The mode class is
 // automatically applied to the <body> element in the app.
 .ct-main {
-    background-color: #90AFC5;
-    width: 100%;
+	width: 100%;
     height: 100%;
+    background-image: url("../assets/imgs/background.jpg");
 }
-.custom-head {
-    background-color: #336B87;
-    height: 50px;
-    width: 100%;
-}
-.custom-content{
 
+.custom-head {
+	background-color: #336B87;
+	height: 50px;
+	width: 100%;
 }
+
+.custom-content {}
+
 .money-main {
-    float: right;
-    font-size: 16px;
-    color: #336B87;
+	float: right;
+	font-size: 16px;
+	color: #336B87;
+}
+
+.metal {
+	position: relative;
+	margin: 2vw auto;
+	outline: none;
+    font-family: "Helvetica Neue", Arial, Helvetica, Geneva, sans-serif;
+    font-weight: bold;
+	text-align: center;
+	color: rgb(51, 51, 51);
+	background-color: rgb(95, 31, 31);
+	transition: color .2s;
+}
+
+/* Radial ------------------------- */
+
+.radial.metal {
+	width: 16px;
+	height: 16px;
+	line-height: 16px;
+	border-radius: 8px;
+	background-image: -webkit-radial-gradient( 50% 0%, 8% 50%, hsla(0, 0%, 100%, .5) 0%, hsla(0, 0%, 100%, 0) 100%), -webkit-radial-gradient( 50% 100%, 12% 50%, hsla(0, 0%, 100%, .6) 0%, hsla(0, 0%, 100%, 0) 100%), -webkit-radial-gradient( 0% 50%, 50% 7%, hsla(0, 0%, 100%, .5) 0%, hsla(0, 0%, 100%, 0) 100%), -webkit-radial-gradient( 100% 50%, 50% 5%, hsla(0, 0%, 100%, .5) 0%, hsla(0, 0%, 100%, 0) 100%), -webkit-repeating-radial-gradient( 50% 50%, 100% 100%, hsla(0, 0%, 0%, 0) 0%, hsla(0, 0%, 0%, 0) 3%, hsla(0, 0%, 0%, .1) 3.5%), -webkit-repeating-radial-gradient( 50% 50%, 100% 100%, hsla(0, 0%, 100%, 0) 0%, hsla(0, 0%, 100%, 0) 6%, hsla(0, 0%, 100%, .1) 7.5%), -webkit-repeating-radial-gradient( 50% 50%, 100% 100%, hsla(0, 0%, 100%, 0) 0%, hsla(0, 0%, 100%, 0) 1.2%, hsla(0, 0%, 100%, .2) 2.2%), -webkit-radial-gradient( 50% 50%, 200% 50%, hsla(0, 0%, 90%, 1) 5%, hsla(0, 0%, 85%, 1) 30%, hsla(0, 0%, 60%, 1) 100%);
+}
+
+.metal.radial:before,
+.metal.radial:after {
+	content: "";
+	top: 0;
+	left: 0;
+	position: absolute;
+	width: inherit;
+	height: inherit;
+	border-radius: inherit;
+	/* fake conical gradients */
+	background-image: -webkit-radial-gradient( 50% 0%, 10% 50%, hsla(0, 0%, 0%, .1) 0%, hsla(0, 0%, 0%, 0) 100%), -webkit-radial-gradient( 50% 100%, 10% 50%, hsla(0, 0%, 0%, .1) 0%, hsla(0, 0%, 0%, 0) 100%), -webkit-radial-gradient( 0% 50%, 50% 10%, hsla(0, 0%, 0%, .1) 0%, hsla(0, 0%, 0%, 0) 100%), -webkit-radial-gradient( 100% 50%, 50% 06%, hsla(0, 0%, 0%, .1) 0%, hsla(0, 0%, 0%, 0) 100%);
+}
+
+.metal.radial:before {
+	transform: rotate( 65deg);
+}
+
+.metal.radial:after {
+	transform: rotate(-65deg);
+}
+
+/* Linear ------------------------- */
+
+.metal.linear {
+	width: 40vw;
+	height: 10vw;
+	font-size: 16px;
+	border-radius: 5px;
+	background-image: -webkit-repeating-linear-gradient(left, hsla(0, 81%, 28%, 0) 0%, hsla(0, 81%, 28%, 0) 6%, hsla(0, 81%, 28%, 0.1) 7.5%), -webkit-repeating-linear-gradient(left, hsla(0, 76%, 8%, 0) 0%, hsla(0, 0%, 0%, 0) 4%, hsla(0, 0%, 0%, .03) 4.5%), -webkit-repeating-linear-gradient(left, hsla(0, 63%, 64%, 0) 0%, hsla(0, 0%, 100%, 0) 1.2%, hsla(0, 0%, 100%, .15) 2.2%), linear-gradient(180deg, hsl(0, 0%, 78%) 0%, hsl(0, 0%, 90%) 47%, hsl(0, 0%, 78%) 53%, hsl(0, 0%, 70%)100%);
+}
+
+/* Oval ------------------------- */
+
+.metal.linear.oval {
+	margin-top: 100px;
+	width: 70px;
+	height: 60px;
+	line-height: 60px !important;
+	border-radius: 50%;
+	font: italic bold 3em/50px Georgia, "Times New Roman", Times, serif;
+}
+
+/* active ------------------------- */
+
+.metal:active {
+	color: hsl(210, 100%, 40%);
+	text-shadow: hsla(210, 100%, 20%, .3) 0 -1px 0, hsl(210, 100%, 85%) 0 2px 1px, hsla(200, 100%, 80%, 1) 0 0 5px, hsla(210, 100%, 50%, .6) 0 0 20px;
+	box-shadow: inset hsla(210, 100%, 30%, 1) 0 0px 0px 4px, /* border */
+	inset hsla(210, 100%, 15%, .4) 0 -1px 5px 4px, /* soft SD */
+	inset hsla(210, 100%, 20%, .25) 0 -1px 0px 7px, /* bottom SD */
+	inset hsla(210, 100%, 100%, .7) 0 2px 1px 7px, /* top HL */
+	hsla(210, 100%, 75%, .8) 0 0px 3px 2px, /* outer SD */
+	hsla(210, 50%, 40%, .25) 0 -5px 6px 4px, /* outer SD */
+	hsla(210, 80%, 95%, 1) 0 5px 6px 4px;
+	/* outer HL */
 }

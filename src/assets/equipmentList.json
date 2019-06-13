@@ -4,9 +4,9 @@
         "space": 1,
         "color": "#FF6666",
         "icon": "cart",
-        "buyingPrice": 20,
+        "buyingPrice": 2000,
         "sellingPrice": 5,
-        "costPerTick": 0
+        "costPerTick": 1
     },{
         "name": "smelter",
         "space": 2,
@@ -14,39 +14,39 @@
         "icon": "color-fill",
         "buyingPrice": 50,
         "sellingPrice": 10,
-        "costPerTick": 0
+        "costPerTick": 5
     },{
         "name": "wiredrawer",
         "space": 3,
         "color": "#FFCC66",
         "icon": "color-wand",
-        "buyingPrice": 45,
-        "sellingPrice": 7,
-        "costPerTick": 0
+        "buyingPrice": 4500,
+        "sellingPrice": 700,
+        "costPerTick": 4
     },{
         "name": "press",
         "space": 4,
         "color": "#FFFF66",
         "icon": "arrow-dropdown-circle",
-        "buyingPrice": 100,
-        "sellingPrice": 20,
-        "costPerTick": 0
+        "buyingPrice": 10000,
+        "sellingPrice": 2000,
+        "costPerTick": 8
     },{
         "name": "cutter",
         "space": 1,
         "color": "#FFE6E6",
         "icon": "cut",
-        "buyingPrice": 30,
-        "sellingPrice": 6,
-        "costPerTick": 0
+        "buyingPrice": 3000,
+        "sellingPrice": 600,
+        "costPerTick": 3
     },{
         "name": "lathe",
         "space": 3,
         "color": "#FFCCCC",
         "icon": "barcode",
-        "buyingPrice": 200,
-        "sellingPrice": 50,
-        "costPerTick": 0
+        "buyingPrice": 20000,
+        "sellingPrice": 5000,
+        "costPerTick": 6
     },{
         "name": "seller",
         "space": 1,

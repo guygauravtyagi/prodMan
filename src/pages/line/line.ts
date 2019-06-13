@@ -3,6 +3,7 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
 import { CommonProvider } from './../../providers/common/common';
 import { count } from 'rxjs/operator/count';
+import { templateJitUrl } from '@angular/compiler';
 
 @IonicPage()
 @Component({
@@ -17,10 +18,12 @@ export class LinePage {
   public selectedLine: any;
   public selectedLineSpace: any = [];
   public equipmentList: any;
+  public productList: any;
   public selectedAction: string = "add";
   private selectedEquipment: any;
   private activeFactory: any = [];
-  private openAddLinePopup: boolean = false;
+  private openAddEquipmentPopup: boolean = false;
+  private openAddProductPopup: boolean = false;
 
   private productLineList: any = [];
 
@@ -34,6 +37,9 @@ export class LinePage {
     });
     this.commonProvider.getEquipmentList.subscribe((object) => {
       this.equipmentList = object;
+    });
+    this.commonProvider.getProductList.subscribe((object) => {
+      this.productList = object;
     });
   }
 
@@ -50,6 +56,7 @@ export class LinePage {
     this.selectedLine = this.activeFactory.lineList[index];
     this.createLineDynamics();
     this.lineListActive = false;
+    this.selectedLine.productList = JSON.parse(JSON.stringify(this.productList));
     if (this.selectedLine && this.selectedLine.groupEquipmentArray && this.selectedLine.groupEquipmentArray.length > 0) this.prePopulateEquipments(this.selectedLine.groupEquipmentArray);
   }
 
@@ -70,8 +77,19 @@ export class LinePage {
     }
   }
 
-  public openPopup() {
-    this.openAddLinePopup = true;
+  public buyEquipmentPopup() {
+    this.closeEveryPopUp();
+    this.openAddEquipmentPopup = true;
+  }
+
+  public buyProductPopup() {
+    this.closeEveryPopUp();
+    this.openAddProductPopup = true;
+  }
+
+  private closeEveryPopUp() {
+    this.openAddEquipmentPopup = false;
+    this.openAddProductPopup = false;
   }
 
   public updateBox(i, j) {
@@ -151,13 +169,15 @@ export class LinePage {
       } else {
         this.selectedLine.equipmentLineList.push({
           selectedEquipment : JSON.parse(JSON.stringify(this.selectedEquipment)) ,
-          count : 1
+          count : 1,
+          active : 0
         });
       }
     } else {
       this.selectedLine.equipmentLineList.push({
         selectedEquipment : JSON.parse(JSON.stringify(this.selectedEquipment)) ,
-        count : 1
+        count : 1,
+        active : 0
       });
     }
     /**
@@ -224,6 +244,13 @@ export class LinePage {
         innerElement.equipment = {};
       });
     });
+    let temp = 0;
+    this.selectedLine.equipmentLineList.forEach(element => {
+      temp = temp + element.selectedEquipment.sellingPrice;
+    });
+    this.commonProvider.updateMoneyEarned(temp);
+    this.selectedLine.groupEquipmentArray.length = 0;
+    this.selectedLine.equipmentLineList.length = 0;
   }
 
   public updateMAD(name) {
@@ -235,7 +262,7 @@ export class LinePage {
   }
 
   public goBackToLine() {
-    this.openAddLinePopup = false;
+    this.closeEveryPopUp();
   }
 
   public updateGameObject() {

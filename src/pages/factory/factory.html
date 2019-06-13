@@ -3,7 +3,7 @@
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-title>Factory List<span class="money-main">${{mainObject?.totalValue}}</span></ion-title>
+    <ion-title>Factory List<span class="money-main">${{mainObject?.totalValue | number}}</span></ion-title>
   </ion-navbar>
 </ion-header>
 
@@ -11,7 +11,7 @@
   <div class="bck-ctt-imc">
     <div *ngFor="let factory of mainObject.factoryList">
       <div>
-        <button class="factory-btn factory-list-btn" (click)="sendToline(factory)">
+        <button class="factory-btn metal linear" (click)="sendToline(factory)">
           {{factory.factoryName}}
           <span class="factory-upd">
             (prfoit: &#36; {{factory.prfoit}})

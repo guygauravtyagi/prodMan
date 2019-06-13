@@ -6,7 +6,7 @@ import { BehaviorSubject } from 'rxjs';
 @Injectable()
 export class CommonProvider {
 
-  private gamePLayObject: any;
+  private gamePlayObject: any;
 
   private gameObject: any;
   private activeFactObj: any;
@@ -33,7 +33,8 @@ export class CommonProvider {
   public equipmentList = new BehaviorSubject(this.equipmentListObj);
   public getEquipmentList = this.equipmentList.asObservable();
     
-  private ticking: any;
+  private ticking: number = 2000;
+  private intervalObj: any;
 
   constructor(public http: HttpClient) {
     this.http.get("./../../assets/default.json").subscribe(data => {
@@ -46,16 +47,17 @@ export class CommonProvider {
         this.setEquipmentList(data);
     });
     this.getGameObject.subscribe((gameObject) => {
-      this.gamePLayObject = gameObject;
+      this.gamePlayObject = gameObject;
     });
+    this.updateChanges();
   }
 
   public updateMoneySpent (spent) {
-    this.gamePLayObject.totalValue = this.gamePLayObject.totalValue - spent;
+    this.gamePlayObject.totalValue = this.gamePlayObject.totalValue - spent;
   }
   
   public updateMoneyEarned (earned) {
-    this.gamePLayObject.totalValue = this.gamePLayObject.totalValue + earned;
+    this.gamePlayObject.totalValue = this.gamePlayObject.totalValue + earned;
   }
 
   public updateGameObject(obj: any) {
@@ -91,7 +93,29 @@ export class CommonProvider {
   }
 
   private updateChanges() {
+    if(this.gamePlayObject) {
+      this.updateProductTickCost(this.gamePlayObject);
+    }
+    setTimeout(() => {
+      this.updateChanges();
+    }, this.ticking);
+  }
 
+  private updateProductTickCost (gameObj) {
+    let cost = 0;
+    gameObj.factoryList.forEach(element => {
+      element.lineList.forEach(subElement => {
+        if(subElement.equipmentLineList && subElement.equipmentLineList.length > 0) {
+          subElement.equipmentLineList.forEach(lineEquip => {
+            cost = cost + (lineEquip.selectedEquipment.costPerTick * lineEquip.active);
+          });
+        }
+      });
+    });
+    gameObj.totalValue = gameObj.totalValue - cost;
+    if(gameObj.totalValue < 0) {
+      gameObj.totalValue = 0;
+    }
   }
 
 }

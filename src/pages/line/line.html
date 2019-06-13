@@ -4,7 +4,7 @@
         *ngIf="activeFactory && activeFactory.lineList && activeFactory.lineList.length > 0 && lineListActive">Active
         Lines</span><span
         *ngIf="activeFactory && activeFactory.lineList && activeFactory.lineList.length > 0 && !lineListActive">{{selectedLine?.lineName}}</span><span
-        class="money-main">${{mainObject?.totalValue}}</span></ion-title>
+        class="money-main">${{mainObject?.totalValue | number}}</span></ion-title>
   </ion-navbar>
 </ion-header>
 
@@ -22,24 +22,34 @@
   </div>
   <div class="line-main-container" *ngIf="!lineListActive">
     <div class="list-keep">
-      <div class="equipment-box">
+      <h4 *ngIf="selectedLine && selectedLine.equipmentLineList && selectedLine.equipmentLineList.length > 0">Equipment List</h4>
+      <h4 *ngIf="!(selectedLine && selectedLine.equipmentLineList && selectedLine.equipmentLineList.length > 0)"><span>No equipment to show</span></h4>
+      <div *ngIf="selectedLine && selectedLine.equipmentLineList && selectedLine.equipmentLineList.length > 0" class="equipment-box">
         <div *ngFor="let equipment of selectedLine?.equipmentLineList">
           <div *ngIf="equipment.count > 0">
-            <label>{{equipment.selectedEquipment.name}}</label>
-            <p>{{equipment.count}}</p>
+            <label>{{equipment.selectedEquipment.name | titlecase}} : <span>{{equipment.count}}</span></label>
+            <p>Active : {{equipment.active}}</p>
           </div>
         </div>
       </div>
-      <div class="product-box">
-        
-      </div>
+      <button class="metal linear" (click)="buyEquipmentPopup();">Buy Equipment</button>
     </div>
-    <div>
-      <button (click)="openPopup();">Add Equipment</button>
+    <div class="list-keep">
+      <div class="equipment-box">
+        <div>
+          <div>
+            <label> : <span> l </span></label>
+          </div>
+        </div>
+      </div>
+      <button class="metal linear" (click)="buyProductPopup();"> Buy product </button>
+    </div>
+    <div style="display: flex; justify-content: center;">
+      <button>Back to line list</button>
     </div>
   </div>
 </ion-content>
-<div class="pop-over" *ngIf="openAddLinePopup">
+<div class="pop-over" *ngIf="openAddEquipmentPopup">
   <div class="back-button-container">
     <div>
       <button (click)="goBackToLine()">Back</button>
@@ -84,5 +94,39 @@
         </li>
       </ul>
     </div>
+  </div>
+</div>
+<div class="pop-over" *ngIf="openAddProductPopup">
+  <div>
+      <div class="back-button-container">
+        <div>
+          <button (click)="goBackToLine()">Back</button>
+        </div>
+        <div class="money-container">
+          <label>${{mainObject?.totalValue}}</label>
+        </div>
+      </div>
+      <div>
+        <div>
+          <div *ngFor="let equipment of selectedLine?.equipmentLineList; let i=index">
+            <label>{{equipment.selectedEquipment.name}} : {{equipment.active}}</label>
+          </div>>
+        </div>
+        <div>
+
+        </div>
+      </div>
+      <div class="product-card-container">
+        <div class="product-card" *ngFor="let product of selectedLine?.productList; let i=index">
+          <div>
+            <label>{{product.name}}</label>
+            <p>Own : {{product.ownCount | number}}</p>
+          </div>
+          <div>
+            <button class="buy-button">Buy</button>
+            <button class="sell-button">Sell</button>
+          </div>
+        </div>
+      </div>
   </div>
 </div>

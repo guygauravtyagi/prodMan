@@ -2,44 +2,50 @@
     {
         "name":"Iron ore",
         "id": "ironOre",
-        "cost": 0.10,
+        "cost": 1,
         "require":[],
         "equipmentRequire": ["buyer"],
-        "productionCost":0
+        "productionCost":0,
+        "ownCount":0
     },{
         "name":"Iron ingot",
         "id": "ironIngot",
-        "cost": 0.20,
+        "cost": 2,
         "require":["ironOre"],
         "equipmentRequire": ["buyer", "smelter"],
-        "productionCost":0
+        "productionCost":0,
+        "ownCount":0
     },{
         "name":"Iron plate",
         "id": "ironPlate",
-        "cost": 0.40,
+        "cost": 4,
         "require":["ironIngot"],
         "equipmentRequire": ["buyer", "press"],
-        "productionCost":0
+        "productionCost":0,
+        "ownCount":0
     },{
         "name":"Iron wire",
         "id": "ironWire",
-        "cost": 0.50,
+        "cost": 5,
         "require":["ironIngot"],
         "equipmentRequire": ["buyer", "wiredrawer"],
-        "productionCost":0
+        "productionCost":0,
+        "ownCount":0
     },{
         "name":"Iron gear",
         "id": "ironGear",
-        "cost": 0.60,
+        "cost": 6,
         "require":["ironPlate"],
         "equipmentRequire": ["buyer", "cutter"],
-        "productionCost":0
+        "productionCost":0,
+        "ownCount":0
     },{
         "name":"Iron bolt",
         "id": "ironBolt",
-        "cost": 0.75,
+        "cost": 3,
         "require":["ironIngot"],
         "equipmentRequire": ["buyer", "lathe"],
-        "productionCost":0
+        "productionCost":0,
+        "ownCount":0
     }    
 ]
