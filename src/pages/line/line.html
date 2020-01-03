@@ -21,6 +21,9 @@
     </button>
   </div>
   <div class="line-main-container" *ngIf="!lineListActive">
+    <div class="list-back-button">
+      <button (click)="backToLineList();">Back to line list</button>
+    </div>
     <div class="list-keep">
       <h4 *ngIf="selectedLine && selectedLine.equipmentLineList && selectedLine.equipmentLineList.length > 0">Equipment
         List</h4>
@@ -46,9 +49,6 @@
         </div>
       </div>
       <button class="metal linear" (click)="buyProductPopup();">Open Products </button>
-    </div>
-    <div style="display: flex; justify-content: center;">
-      <button>Back to line list</button>
     </div>
   </div>
 </ion-content>

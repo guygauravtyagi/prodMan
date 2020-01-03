@@ -60,6 +60,10 @@ export class LinePage {
     if (this.selectedLine && this.selectedLine.groupEquipmentArray && this.selectedLine.groupEquipmentArray.length > 0) this.prePopulateEquipments(this.selectedLine.groupEquipmentArray);
   }
 
+  public backToLineList(){
+    this.lineListActive = true;
+  }
+
   private createLineDynamics() {
     if (this.selectedLine && this.selectedLine.lineSpace > 0) {
       let tempCount = this.selectedLine.lineSpace / 10;

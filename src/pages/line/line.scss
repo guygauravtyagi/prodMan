@@ -313,9 +313,24 @@ page-line {
         }
         .line-main-container {
             width: 100vw;
+            .list-back-button {
+                height: 10vw;
+                width: 100%;
+                align-content: center;
+                margin-top: 4vw;
+                button {
+                    height: 100%;
+                    width: 60%;
+                    background-color: #fd1d1d;
+                    margin-left: 20%;
+                    font-size: 6vw;
+                    font-weight: bolder;
+                    color: #ffe8e4;
+                    box-shadow: 5px 5px 3px -2px rgba(0,0,0,0.75);
+                }
+            }
             .list-keep {
                 padding: 2vw;
-                background: rgba(33, 46, 42, 0.5);
                 h4 {
                     margin: 0;
                     color: #bbf5e2;
