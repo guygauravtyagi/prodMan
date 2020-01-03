@@ -22,9 +22,12 @@
   </div>
   <div class="line-main-container" *ngIf="!lineListActive">
     <div class="list-keep">
-      <h4 *ngIf="selectedLine && selectedLine.equipmentLineList && selectedLine.equipmentLineList.length > 0">Equipment List</h4>
-      <h4 *ngIf="!(selectedLine && selectedLine.equipmentLineList && selectedLine.equipmentLineList.length > 0)"><span>No equipment to show</span></h4>
-      <div *ngIf="selectedLine && selectedLine.equipmentLineList && selectedLine.equipmentLineList.length > 0" class="equipment-box">
+      <h4 *ngIf="selectedLine && selectedLine.equipmentLineList && selectedLine.equipmentLineList.length > 0">Equipment
+        List</h4>
+      <h4 *ngIf="!(selectedLine && selectedLine.equipmentLineList && selectedLine.equipmentLineList.length > 0)">
+        <span>No equipment to show</span></h4>
+      <div *ngIf="selectedLine && selectedLine.equipmentLineList && selectedLine.equipmentLineList.length > 0"
+        class="equipment-box">
         <div *ngFor="let equipment of selectedLine?.equipmentLineList">
           <div *ngIf="equipment.count > 0">
             <label>{{equipment.selectedEquipment.name | titlecase}} : <span>{{equipment.count}}</span></label>
@@ -32,7 +35,7 @@
           </div>
         </div>
       </div>
-      <button class="metal linear" (click)="buyEquipmentPopup();">Buy Equipment</button>
+      <button class="metal linear" (click)="buyEquipmentPopup();">Open Equipment</button>
     </div>
     <div class="list-keep">
       <div class="equipment-box">
@@ -42,7 +45,7 @@
           </div>
         </div>
       </div>
-      <button class="metal linear" (click)="buyProductPopup();"> Buy product </button>
+      <button class="metal linear" (click)="buyProductPopup();">Open Products </button>
     </div>
     <div style="display: flex; justify-content: center;">
       <button>Back to line list</button>
@@ -97,36 +100,93 @@
   </div>
 </div>
 <div class="pop-over" *ngIf="openAddProductPopup">
+  <div class="back-button-container">
+    <div>
+      <button (click)="goBackToLine()">Back</button>
+    </div>
+    <div class="money-container">
+      <label>${{mainObject?.totalValue}}</label>
+    </div>
+  </div>
+  <div class="equipment-container">
+    <h4>Available Equipment</h4>
+    <div class="equip-label-container">
+      <div *ngFor="let equipment of selectedLine?.equipmentLineList; let i=index">
+        <label>{{equipment.selectedEquipment.name | titlecase}} : {{equipment.count - equipment.active}}</label>
+      </div>
+    </div>
+    <div class="product-container">
+      <h5>Automate buying</h5>
+      <div class="product-select-container">
+        <div>
+          <div class="product-select-box">
+            <select>
+              <option class="select-option" *ngFor="let product of selectedLine?.productList; let i=index"
+                value="product">{{product.name | titlecase}}</option>
+            </select>
+          </div>
+          <div class="product-requirement-container">
+            <input type="button" value="-" (click)="updateProductCount(false)">
+            <input type="number" value="0" [(ngModel)]="selectedProductCount">
+            <input type="button" value="+" (click)="updateProductCount(true)">
+          </div>
+        </div>
+        <button>Done</button>
+      </div>
+      <h5>Produce</h5>
+      <p>Starts production using the available equipments. Products will be added in your inventory per tick.</p>
+      <div class="product-select-container">
+        <div>
+          <div class="product-select-box">
+            <select [(ngModel)]="selectedProductToProduce">
+              <option class="select-option" *ngFor="let product of selectedLine?.productList; let i=index" value="{{product}}">{{product.name | titlecase}}</option>
+            </select>
+          </div>
+          <div class="product-requirement-container">
+            <input type="button" value="-" (click)="updateProductCount(false)">
+            <input type="number" value="0" [(ngModel)]="selectedProductCount">
+            <input type="button" value="+" (click)="updateProductCount(true)">
+          </div>
+        </div>
+        <div>
+          <div>
+              <label>Need : {{selectedProductToProduce}}</label>
+          </div>
+          <div>
+            <div *ngFor="let eqReq of selectedProductToProduce?.equipmentRequire; let i=index">
+              <h5>Equipment Required</h5>
+              <h6>{{eqReq}} :</h6> <p>{{selectedProductCount}}</p>
+            </div>
+            <div *ngFor="let prReq of selectedProductToProduce?.require; let i=index">
+              <h5>Product consumed per tick</h5>
+              <h6>{{prReq}} :</h6> <p>{{selectedProductCount}}</p>
+            </div>
+          </div>
+        </div>
+        <button>Produce</button>
+      </div>
+    </div>
+  </div>
   <div>
-      <div class="back-button-container">
+    <h5 class="move-4vw">Manually Buy and sell per quantity.</h5>
+    <div class="quantity-cover">
+      <button (click)="countSelected = 1" [ngClass]="{'selectedQty' : countSelected == 1}">1</button>
+      <button (click)="countSelected = 10" [ngClass]="{'selectedQty' : countSelected == 10}">10</button>
+      <button (click)="countSelected = 50" [ngClass]="{'selectedQty' : countSelected == 50}">50</button>
+      <button (click)="countSelected = 100" [ngClass]="{'selectedQty' : countSelected == 100}">100</button>
+      <button (click)="countSelected = 250" [ngClass]="{'selectedQty' : countSelected == 250}">250</button>
+    </div>
+    <div class="product-card-container">
+      <div class="product-card" *ngFor="let product of selectedLine?.productList; let i=index">
         <div>
-          <button (click)="goBackToLine()">Back</button>
+          <label>{{product.name}}</label>
+          <p>Own : {{product.ownCount | number}}</p>
         </div>
-        <div class="money-container">
-          <label>${{mainObject?.totalValue}}</label>
+        <div>
+          <button class="buy-button" (click)="buyProductDirectly(product, countSelected)">Buy</button>
+          <button class="sell-button" (click)="sellProductDirectly(product, countSelected)">Sell</button>
         </div>
       </div>
-      <div>
-        <div>
-          <div *ngFor="let equipment of selectedLine?.equipmentLineList; let i=index">
-            <label>{{equipment.selectedEquipment.name}} : {{equipment.active}}</label>
-          </div>>
-        </div>
-        <div>
-
-        </div>
-      </div>
-      <div class="product-card-container">
-        <div class="product-card" *ngFor="let product of selectedLine?.productList; let i=index">
-          <div>
-            <label>{{product.name}}</label>
-            <p>Own : {{product.ownCount | number}}</p>
-          </div>
-          <div>
-            <button class="buy-button">Buy</button>
-            <button class="sell-button">Sell</button>
-          </div>
-        </div>
-      </div>
+    </div>
   </div>
 </div>

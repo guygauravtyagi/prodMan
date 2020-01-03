@@ -9,21 +9,23 @@
 
 <ion-content class="ct-main">
   <div class="bck-ctt-imc">
-    <div *ngFor="let factory of mainObject.factoryList">
-      <div>
-        <button class="factory-btn metal linear" (click)="sendToline(factory)">
-          {{factory.factoryName}}
-          <span class="factory-upd">
-            (prfoit: &#36; {{factory.prfoit}})
-          </span>
-        </button>
+    <div class="factory-list-container" *ngFor="let factory of mainObject.factoryList" (click)="sendToline(factory)">
+      <div class="factory-list-head">
+        <label>{{factory.factoryName}}</label>
+        <p class="factory-upd">Prfoit: &#36; {{factory.prfoit}}</p>
+      </div>
+      <div class="factory-list-body">
+        <div>
+            <p>Total Lines : {{factory.lineList.length}}</p>
+            <p>Maximum Lines : {{factory.maximumLine}}</p>
+        </div>
       </div>
     </div>
-    <div>
-      <button class="factory-btn add-factory-btn">
-        <ion-icon name="add-circle"></ion-icon>
-        Buy More Factory
-      </button>
-    </div>
+  </div>
+  <div>
+    <button class="factory-btn add-factory-btn">
+      <ion-icon name="add-circle"></ion-icon>
+      Buy More Factory
+    </button>
   </div>
 </ion-content>

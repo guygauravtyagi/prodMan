@@ -13,20 +13,20 @@ import { templateJitUrl } from '@angular/compiler';
 export class LinePage {
 
   private mainObject: any;
-  
   public lineListActive: boolean = true;
   public selectedLine: any;
   public selectedLineSpace: any = [];
   public equipmentList: any;
   public productList: any;
   public selectedAction: string = "add";
+  public selectedProductCount: number = 0;
+  public selectedProductToProduce: any;
   private selectedEquipment: any;
   private activeFactory: any = [];
   private openAddEquipmentPopup: boolean = false;
   private openAddProductPopup: boolean = false;
-
   private productLineList: any = [];
-
+  private countSelected = 1;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public commonProvider: CommonProvider) {
     this.commonProvider.getGameObject.subscribe((gameObject) => {
@@ -149,35 +149,35 @@ export class LinePage {
         tempArr.push({ i: i + 1, j: j + 1 });
       }
     }
-    this.updateAddition(tempArr);
+    if(tempArr.length > 0) this.updateAddition(tempArr);
   }
 
   private updateAddition(arr) {
     let equipmentDetails = {};
     equipmentDetails['equipGroup'] = arr;
     equipmentDetails['selectedEquipment'] = this.selectedEquipment;
-    this.selectedLine.groupEquipmentArray.push(equipmentDetails);    
-    if(this.selectedLine.equipmentLineList.length > 0) {
+    this.selectedLine.groupEquipmentArray.push(equipmentDetails);
+    if (this.selectedLine.equipmentLineList.length > 0) {
       let indexFlag = 0;
       for (let index = 0; index < this.selectedLine.equipmentLineList.length; index++) {
-        if(this.selectedLine.equipmentLineList[index].selectedEquipment.name === this.selectedEquipment.name) {
-          indexFlag = index +1;
+        if (this.selectedLine.equipmentLineList[index].selectedEquipment.name === this.selectedEquipment.name) {
+          indexFlag = index + 1;
         }
       }
-      if(indexFlag) {
-        this.selectedLine.equipmentLineList[indexFlag -1].count += 1;
+      if (indexFlag) {
+        this.selectedLine.equipmentLineList[indexFlag - 1].count += 1;
       } else {
         this.selectedLine.equipmentLineList.push({
-          selectedEquipment : JSON.parse(JSON.stringify(this.selectedEquipment)) ,
-          count : 1,
-          active : 0
+          selectedEquipment: JSON.parse(JSON.stringify(this.selectedEquipment)),
+          count: 1,
+          active: 0
         });
       }
     } else {
       this.selectedLine.equipmentLineList.push({
-        selectedEquipment : JSON.parse(JSON.stringify(this.selectedEquipment)) ,
-        count : 1,
-        active : 0
+        selectedEquipment: JSON.parse(JSON.stringify(this.selectedEquipment)),
+        count: 1,
+        active: 0
       });
     }
     /**
@@ -200,24 +200,24 @@ export class LinePage {
           }
         }
       }
-      if(this.selectedLine && this.selectedLine.groupEquipmentArray && this.selectedLine.groupEquipmentArray[temp] && this.selectedLine.groupEquipmentArray[temp].selectedEquipment) {
+      if (this.selectedLine && this.selectedLine.groupEquipmentArray && this.selectedLine.groupEquipmentArray[temp] && this.selectedLine.groupEquipmentArray[temp].selectedEquipment) {
         this.commonProvider.updateMoneyEarned(this.selectedLine.groupEquipmentArray[temp].selectedEquipment.sellingPrice);
-        if(this.selectedLine.equipmentLineList.length === 1 && this.selectedLine.equipmentLineList.count === 1) {
-          if(this.selectedLine.equipmentLineList[0].selectedEquipment.name === this.selectedLine.groupEquipmentArray[temp].selectedEquipment.name) {
+        if (this.selectedLine.equipmentLineList.length === 1 && this.selectedLine.equipmentLineList.count === 1) {
+          if (this.selectedLine.equipmentLineList[0].selectedEquipment.name === this.selectedLine.groupEquipmentArray[temp].selectedEquipment.name) {
             this.selectedLine.equipmentLineList.length = 0;
           }
         } else {
           let tempIndex = 0;
           for (let index = 0; index < this.selectedLine.equipmentLineList.length; index++) {
-            if(this.selectedLine.groupEquipmentArray[temp].selectedEquipment.name === this.selectedLine.equipmentLineList[index].selectedEquipment.name) {
+            if (this.selectedLine.groupEquipmentArray[temp].selectedEquipment.name === this.selectedLine.equipmentLineList[index].selectedEquipment.name) {
               tempIndex = index + 1;
             }
           }
-          if(tempIndex) {
-            if(this.selectedLine.equipmentLineList[tempIndex - 1].count > 0) {
+          if (tempIndex) {
+            if (this.selectedLine.equipmentLineList[tempIndex - 1].count > 0) {
               this.selectedLine.equipmentLineList[tempIndex - 1].count -= 1;
             } else if (this.selectedLine.equipmentLineList[tempIndex - 1].count === 0) {
-              this.selectedLine.equipmentLineList.splice(tempIndex -1, 1);
+              this.selectedLine.equipmentLineList.splice(tempIndex - 1, 1);
             } else {
               /**
                * Check how TF is this even possible
@@ -253,6 +253,20 @@ export class LinePage {
     this.selectedLine.equipmentLineList.length = 0;
   }
 
+  public updateProductCount(isIncrement) {
+    if (isIncrement != undefined) {
+      if (isIncrement) {
+        this.selectedProductCount += 1;
+      } else {
+        this.selectedProductCount -= 1;
+        if (this.selectedProductCount < 0) this.selectedProductCount = 0;
+      }
+    }
+    if (this.selectedProductCount) {
+
+    }
+  }
+
   public updateMAD(name) {
     this.selectedAction = name;
   }
@@ -263,6 +277,24 @@ export class LinePage {
 
   public goBackToLine() {
     this.closeEveryPopUp();
+  }
+
+  private buyProductDirectly(product, countSelected) {
+    for (let index = 0; index < this.selectedLine.productList.length; index++) {
+      if(this.selectedLine.productList[index].id === product.id) {
+        this.selectedLine.productList[index].ownCount += countSelected;
+        this.commonProvider.updateMoneySpent(this.selectedLine.productList[index].costPrice*countSelected);
+      }      
+    }
+  }
+
+  private sellProductDirectly(product, countSelected) {
+    for (let index = 0; index < this.selectedLine.productList.length; index++) {
+      if(this.selectedLine.productList[index].id === product.id && this.selectedLine.productList[index].ownCount >= countSelected) {
+        this.selectedLine.productList[index].ownCount -= countSelected;
+        this.commonProvider.updateMoneyEarned(this.selectedLine.productList[index].sellingPrice*countSelected);
+      }      
+    }
   }
 
   public updateGameObject() {
